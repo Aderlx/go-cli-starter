@@ -14,7 +14,7 @@ This is a go cli starter
 ## Usage
 `git clone https://github.com/Aderlx/go-cli-starter.git`
 
-## Example
+## Example
 ```
 go run main.go run -m message
 
