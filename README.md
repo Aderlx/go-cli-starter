@@ -7,6 +7,7 @@ This is a go cli starter
 - [x] Log Use `go.uber.org/zap`
 - [x] Config Use `github.com/spf13/viper`
 - [x] CLI Command Use `github.com/urfave/cli/v2`
+- [x] Http Use `"github.com/valyala/fasthttp"`
 - [ ] More utils...
 
 ---
