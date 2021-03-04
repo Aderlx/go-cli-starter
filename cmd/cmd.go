@@ -3,15 +3,22 @@ package cmd
 import (
 	// "zy/utils"
 
-	"go-cli-starter/log"
+	// "go-cli-starter/log"
+
+	"go-cli-starter/utils"
 
 	"github.com/urfave/cli/v2"
 )
 
 func runAction(c *cli.Context) error {
 
-	message := c.String("message")
-	log.Logger.Info(message)
+	message := c.String("url")
+	_, err := utils.HTTPGet(message)
+
+	if err != nil {
+		return nil
+	}
+
 	return nil
 }
 
@@ -23,9 +30,9 @@ var Run = &cli.Command{
 	Flags: []cli.Flag{
 
 		&cli.StringFlag{
-			Name:    "message",
-			Aliases: []string{"m"},
-			Usage:   "Print Message.",
+			Name:    "url",
+			Aliases: []string{"u"},
+			Usage:   "Http Get url",
 		},
 	},
 }

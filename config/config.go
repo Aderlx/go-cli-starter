@@ -14,7 +14,7 @@ func init() {
 	viper.SetConfigName("config")
 
 	//添加配置文件所在的路径
-	viper.AddConfigPath(".")
+	viper.AddConfigPath("./")
 
 	//设置配置文件类型，可选
 	viper.SetConfigType("toml")

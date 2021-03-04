@@ -22,6 +22,8 @@ var maxAge = config.Get("log.maxAge").(int64)
 
 var compress = config.Get("log.compress").(bool)
 
+var formatJson = config.Get("log.formatJson").(bool)
+
 func init() {
 	hook := lumberjack.Logger{
 		Filename:   logFilePath,     // 日志文件路径
@@ -50,8 +52,18 @@ func init() {
 	atomicLevel := zap.NewAtomicLevel()
 	atomicLevel.SetLevel(zap.InfoLevel)
 
+	// 日志输出格式
+	var encoder zapcore.Encoder
+
+	// 是否是json
+	if formatJson {
+		encoder = zapcore.NewJSONEncoder(encoderConfig)
+	} else {
+		encoder = zapcore.NewConsoleEncoder(encoderConfig)
+	}
+
 	core := zapcore.NewCore(
-		zapcore.NewConsoleEncoder(encoderConfig),
+		encoder,
 		// zapcore.NewJSONEncoder(encoderConfig),                                           // 编码器配置
 		zapcore.NewMultiWriteSyncer(zapcore.AddSync(os.Stdout), zapcore.AddSync(&hook)), // 打印到控制台和文件
 		atomicLevel, // 日志级别
